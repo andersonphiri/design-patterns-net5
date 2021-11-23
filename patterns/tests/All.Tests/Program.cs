@@ -1,5 +1,9 @@
 ﻿using Decorator;
+using Factories.Kernel.Autos;
+using FactoryA;
+using FactoryMethod;
 using System;
+using System.Reflection;
 
 namespace All.Tests
 {
@@ -9,7 +13,9 @@ namespace All.Tests
         {
             try
             {
-                Decorator();
+                // Decorator();
+                // Simplefactory();
+                FactoryMethod();
                 Console.ReadKey();
             }
             catch (Exception ex)
@@ -22,5 +28,24 @@ namespace All.Tests
             DecoratorTestClass dt = new();
             dt.RunTest();
         }
+
+        static void Simplefactory()
+        {
+            SolutionWithSimpleFactory solution = new ();
+            solution.Run(nameof(MercedesBrabas));
+        }
+
+        static void FactoryMethod()
+        {
+            var type = typeof(MercedesBrabasFactory);
+            var sm = LoadFactory(type.FullName);
+            if (sm is null) return;
+            var am = sm?.CreateAutoMobile();
+            am.TurnOn();
+            am.TurnOff();
+
+
+        }
+        static IAutoFactory LoadFactory(string name) => Assembly.GetCallingAssembly().CreateInstance(name) as IAutoFactory;
     }
 }

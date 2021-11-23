@@ -7,6 +7,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Decorator\Decorator.csproj" />
+    <ProjectReference Include="..\..\src\Factories\FactoryA\FactoryA.csproj" />
+    <ProjectReference Include="..\..\src\Factories\FactoryMethod\FactoryMethod.csproj" />
   </ItemGroup>
 
 </Project>
